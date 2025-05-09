@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-20.04
 
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=P@ssw0rd123
