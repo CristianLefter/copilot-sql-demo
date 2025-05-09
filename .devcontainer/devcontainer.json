@@ -8,7 +8,7 @@
   },
   "extensions": [
     "ms-azuretools.vscode-docker",
-    "ms-vscode.sql",
+    "ms-mssql.mssql",
     "GitHub.copilot"
   ]
 }
