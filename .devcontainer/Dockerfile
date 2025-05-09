@@ -16,8 +16,19 @@ RUN apt-get update && \
     ln -s /opt/mssql-tools/bin/bcp /usr/bin/bcp && \
     apt-get clean
 
-# Configure SQL Server
+# Create a non-root user 'vscode' to satisfy Codespaces requirement
+RUN useradd -m vscode && \
+    echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd && \
+    chmod 0440 /etc/sudoers.d/nopasswd
 
+# Switch to the vscode user
+USER vscode
+
+# Set the default shell and working directory
+ENV SHELL=/bin/bash
+WORKDIR /workspaces
+
+# Expose the SQL Server port
 EXPOSE 1433
 
 CMD ["/opt/mssql/bin/sqlservr"]
