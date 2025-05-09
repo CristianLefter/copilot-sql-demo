@@ -17,7 +17,6 @@ RUN apt-get update && \
     apt-get clean
 
 # Configure SQL Server
-RUN /opt/mssql/bin/mssql-conf -n setup accept-eula --set-sa-password
 
 EXPOSE 1433
 
