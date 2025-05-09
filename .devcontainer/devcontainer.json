@@ -1,0 +1,15 @@
+{
+  "name": "SQL Server + Copilot Demo",
+  "dockerFile": "Dockerfile",
+  "appPort": [1433],
+  "postCreateCommand": "/bin/bash -c 'sleep 20 && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P P@$$w.rd123 -d master -i /workspace/sql/schema.sql'",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.sql",
+    "GitHub.copilot"
+  ],
+  "remoteUser": "vscode"
+}
