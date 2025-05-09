@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:0-ubuntu-22.04
+FROM FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=P@ssw0rd123
