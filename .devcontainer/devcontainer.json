@@ -1,13 +1,24 @@
 {
-  "name": "SQL Server + Copilot Demo",
-  "dockerFile": "Dockerfile",
-  "appPort": [1433],
+  "name": "Copilot SQL Demo with Sidecar",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "forwardPorts": [1433],
+  "runServices": ["mssql"],
   "postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
+  "services": {
+    "mssql": {
+      "image": "mcr.microsoft.com/mssql/server:2019-latest",
+      "env": {
+        "ACCEPT_EULA": "Y",
+        "SA_PASSWORD": "P@ssw0rd123"
+      },
+      "capAdd": ["SYS_PTRACE"],
+      "restart": "always"
+    }
+  },
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": [
-    "ms-azuretools.vscode-docker",
     "ms-mssql.mssql",
     "GitHub.copilot"
   ]
