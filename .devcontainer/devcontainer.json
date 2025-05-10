@@ -1,25 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/dotnet-mssql
 {
-  "name": "Copilot SQL Demo with Sidecar",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "forwardPorts": [1433],
-  "runServices": ["mssql"],
-  "postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
-  "services": {
-    "mssql": {
-      "image": "mcr.microsoft.com/mssql/server:2019-latest",
-      "env": {
-        "ACCEPT_EULA": "Y",
-        "SA_PASSWORD": "P@ssw0rd123"
-      },
-      "capAdd": ["SYS_PTRACE"],
-      "restart": "always"
-    }
-  },
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
-  "extensions": [
-    "ms-mssql.mssql",
-    "GitHub.copilot"
-  ]
+	"name": "C# (.NET) and MS SQL",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container-specific settings.json values on container create.
+			"settings": { 
+				"mssql.connections": [
+					{
+						"server": "localhost,1433",
+						"database": "",
+						"authenticationType": "SqlLogin",
+						"user": "sa",
+						"password": "P@ssw0rd",
+						"emptyPasswordInput": false,
+						"savePassword": false,
+						"profileName": "mssql-container"
+					}
+				],
+				"sqlDatabaseProjects.dotnetSDK Location": "/usr/bin/"
+			},
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-dotnettools.csharp",
+				"ms-mssql.mssql"
+			]
+		}
+	},
+	"features": {
+        "ghcr.io/devcontainers/features/azure-cli:1": {
+            "version": "latest"
+        }
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000, 5001],
+
+	
+	// postCreateCommand.sh parameters: $1=SA password, $2=dacpac path, $3=sql script(s) path
+	"postCreateCommand": "bash .devcontainer/mssql/postCreateCommand.sh 'P@ssw0rd' './bin/Debug/' './.devcontainer/mssql/'",
+	"remoteEnv": {
+		"PATH": "${containerEnv:PATH}:/opt/mssql-tools/bin"
+	}
 }
