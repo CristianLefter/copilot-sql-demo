@@ -1,0 +1,1 @@
+-- 1. List all customers with their total number of orders
