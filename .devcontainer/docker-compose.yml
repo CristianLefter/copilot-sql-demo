@@ -27,6 +27,7 @@ services:
 
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
     restart: unless-stopped
     environment:
       SA_PASSWORD: P@ssw0rd
